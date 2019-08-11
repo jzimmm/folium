@@ -203,6 +203,8 @@ class HeatMapWithTime(Layer):
                 L.TimeDimension.Layer.prototype.initialize.call(this, layer, options);
                 this._currentLoadedTime = 0;
                 this._currentTimeData = {
+                    min: heatmapCfg.min,
+                    max: heatmapCfg.max,
                     data: []
                     };
                 this.data= data;
