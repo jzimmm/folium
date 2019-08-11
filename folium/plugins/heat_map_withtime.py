@@ -92,6 +92,8 @@ class HeatMapWithTime(Layer):
                 var {{this.get_name()}} = new TDHeatmap({{this.data}},
                 {heatmapOptions: {
                         radius: {{this.radius}},
+                        min: {{this.min}},
+                        max: {{this.max}},
                         minOpacity: {{this.min_opacity}},
                         maxOpacity: {{this.max_opacity}},
                         scaleRadius: {{this.scale_radius}},
@@ -105,12 +107,11 @@ class HeatMapWithTime(Layer):
         {% endmacro %}
         """)
 
-    def __init__(self, data, index=None, name=None, radius=15, min_opacity=0,
-                 max_opacity=0.6, scale_radius=False, gradient=None,
-                 use_local_extrema=False, auto_play=False,
-                 display_index=True, index_steps=1, min_speed=0.1,
-                 max_speed=10, speed_step=0.1, position='bottomleft',
-                 overlay=True, control=True, show=True):
+    def __init__(self, data, index=None, name=None, radius=15, min=0, max=10,
+                 min_opacity=0, max_opacity=0.6, scale_radius=False, gradient=None,
+                 use_local_extrema=False, auto_play=False, display_index=True, 
+                 index_steps=1, min_speed=0.1, max_speed=10, speed_step=0.1, 
+                 position='bottomleft', overlay=True, control=True, show=True):
         super(HeatMapWithTime, self).__init__(name=name, overlay=overlay,
                                               control=control, show=show)
         self._name = 'HeatMap'
@@ -126,6 +127,8 @@ class HeatMapWithTime(Layer):
 
         # Heatmap settings.
         self.radius = radius
+        self.min = min
+        self.max = max
         self.min_opacity = min_opacity
         self.max_opacity = max_opacity
         self.scale_radius = 'true' if scale_radius else 'false'
